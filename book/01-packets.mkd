@@ -14,7 +14,7 @@ and there were over 20 years of research into how to build
 internetworking technologies before the first "Internet" was built
 in the late 1980s by academics in a project called NSFNet.
 Since then, the research and development into improving network technologies
-has continued as networks have become far larger and faster and globally
+has continued as networks have become larger and faster and globally
 distributed with billions of computers.
 
 In order to better understand how today's Internet works, we will take a look
@@ -33,7 +33,7 @@ see or hear each other? How could pairs of people communicate with each other
 then?  One way might be to run a wire between each pair of people with a
 microphone on one end and a speaker on the other end. Now everyone could still
 hear all the conversations. They would still need to be courteous to make sure
-that there was only one conversation going on at the same time.
+there was only one conversation going on at the same time.
 
 Each person would need four speakers (one for each of the other people)
 and enough pieces of wire to connect all the microphones and speakers.
@@ -249,7 +249,7 @@ By creating a network using multiple short hops, the
 overall cost of communicating across a large geographical area could be spread
 across a large number of connecting groups and individuals. Normally,
 packets would find the shortest path between the source and destination, but if
-a link on that path was an overloaded or broken, the routers could cooperate and
+a link on that path was overloaded or broken, the routers could cooperate and
 reroute traffic to take slightly longer paths that would get packets from a
 source to a destination as quickly as possible.
 
@@ -287,7 +287,7 @@ and helps people make telephone calls.
 
 **packet**: A limited-size fragment of a large message. Large messages or
 files are split into many packets and sent across the Internet.
-The typical maximum packet size is between 1000 and 3000 characters.
+The typical maximum packet size is between 1000 and 9000 characters.
 
 **router**: A specialized computer that is designed to receive incoming
 packets on many links and quickly forward the packets on the best outbound
@@ -307,7 +307,7 @@ different organizations.
 
 
 
-
+<!--
 Questions
 ---------
 
@@ -363,7 +363,7 @@ a) Because governments pay for all the connections
 b) Because advertising pays for all the connections
 c) Because so many people share all the resources
 d) Because it is illegal to charge for long-distance connections
-
+-->
 
 
 

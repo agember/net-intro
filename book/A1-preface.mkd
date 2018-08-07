@@ -13,10 +13,12 @@ The illustrations were converted from PNG to
 SVG and EPS vector formats using www.vectormagic.com.
 The technical figures for the book were drawn with OmniGraffle.
 
+<!--
 Printing History
 ----------------
 
 2015-May-25 Original Printing - CreateSpace
+-->
 
 Copyright Details
 -----------------
@@ -42,8 +44,12 @@ other than English, please contact me. I am willing to
 give commercial print distribution rights for a complete and
 responsible translation.
 
+This version of the book has been adapted for _FSEM 136: The Unreliable
+Internet_ at Colgate University by Aaron Gember-Jacobson.
+
 \cleardoublepage
 
+<!--
 Preface
 =======
 \thispagestyle{empty}
@@ -90,4 +96,4 @@ You can also send a tweet if you find an error in the book.
     www.dr-chuck.com
     Ann Arbor, MI USA
     May 20, 2015
-
+!-->

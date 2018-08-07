@@ -30,24 +30,191 @@ Internet architecture.
 We informally refer to this model as the "TCP/IP model" in reference to
 the Transport Control Protocol (TCP) used to implement the Transport layer
 and Internet Protocol (IP) used to implement the Internetwork layer.
-
-We will take a quick look at each of the layers, starting from the "bottom" of
+We will take a quick look at each of the layers, starting from the "top" of
 the stack.
+
+The Application Layer
+---------------------
+
+\index{Application Layer}
+\index{Layer!Application}
+<!--The Link, Internetwork, and Transport layers work together to quickly and
+reliably move data between two computers across a shared network of networks.
+With this capability to move data reliably, the next question is what
+networked applications will be built to make use of these network connections.-->
+
+\index{remote log in}
+When the first widely used Internet came into being in the mid-1980s, the first
+networked applications allowed users to log in to remote computers, transfer files
+between computers, send mail between computers, and even do real-time text chats
+between computers.
+
+\index{Web}
+\index{CERN}
+In the early 1990s, as the Internet came to more people and computers' abilities
+to handle images improved, the World Wide Web application was developed by
+scientists at the CERN high-energy physics facility. The web was focused on
+reading and editing networked hypertext documents with images. Today the web is
+the most common network application in use around the world.  But all the other
+older Internet applications are still in wide use.
+
+![Client/Server Applications](../sketchnote/Client_Server)
+
+\index{client}
+\index{server}
+\index{client-server}
+\index{URL}
+\index{Uniform Resource Locator}
+Each application is generally broken into two halves. One half of the
+application is called the "server". It runs on the destination computer and
+waits for requests. The other half of the application is called the "client"
+and runs on the source computer. When you are browsing the web using software
+like Firefox, Chrome, Safari, or Internet Explorer, you are running a "web
+client" application which is making requests to web servers and displaying the
+pages and documents stored on those web servers. The Uniform Resource Locators
+(URLs) that your web browser shows in its address bar are the web servers that
+your client is contacting to retrieve documents for you to view.
+
+When we develop the server half and the client half of a networked application,
+we must also define an "application protocol" that describes how the two
+halves of the application will exchange messages over the network. The protocols
+used for each application are quite different and specialized to meet the needs
+of the particular application.  
+
+The Transport Layer (TCP)
+-------------------------
+
+The data requested from a web server may be quite large. For example, this book
+is over 150,000 characters and contains several dozen images. Thus, the data
+must be broken into smaller pieces before being sent to your computer. It is
+the job of the Transport layer to divide an application's messages into
+packets.
+
+Sometimes these packets get lost. Other times the packets
+arrive at their destination out of order because a later packet found a quicker
+path through the network than an earlier packet. Each packet contains an offset
+of where this packet "fits" relative to the beginning of the message. Knowing
+the offset of each packet from the beginning of the message and the length of
+the packet, the destination computer can reconstruct the original message even
+if the packets were received out of order.
+
+\index{acknowledgements}
+\index{ACK}
+As the destination computer reconstructs the message and delivers it to
+the receiving application, it periodically sends an
+acknowledgement back to the source computer indicating how much of the message it
+has received and reconstructed. But if the destination computer finds that parts
+of the reconstructed message are missing, this probably means these packets were
+lost or badly delayed. After waiting a bit, the destination computer sends
+a request to the source computer to resend the data that seems to be missing.
+
+The sending computer must store a copy of the parts of the original message
+that have been sent until the destination computer acknowledges successful receipt
+of the packets. Once the source computer receives the acknowledgment of
+successful receipt of a portion of the message, it can discard the data that
+has been acknowledged and send some more data.
+
+<!--
+\index{window size}
+\index{courtesy}
+The amount of data that the source computer sends before waiting for an
+acknowledgement is called the "window size". If the window size is too small,
+the data transmission is slowed because the source computer is always waiting
+for acknowledgments. If the source computer sends too much data before waiting
+for an acknowledgment, it can unintentionally cause traffic problems by
+overloading routers or long-distance communication lines. This problem is
+solved by keeping the window size small at the beginning and timing how
+long it takes to receive the first acknowledgements. If the acknowledgments
+come back quickly, the source computer slowly increases the window size and if
+the acknowledgements come back slowly, the source computer keeps the window
+size small so as not to overload the network. A little courtesy on the Internet
+goes a long way toward ensuring good use of the shared network infrastructure.
+
+\index{flow control}
+This strategy means that when the network has high-speed connections and is
+lightly loaded the data will be sent quickly, and if the network is
+heavily loaded or has slow connections the data will be slowed down to match
+the limitations of the network connections between the source and destination
+computers.
+-->
+
+The Internetwork Layer (IP)
+---------------------------
+
+In addition to an offset, each packet is labeled with the addresses 
+of the source and destination computers. Each router in the network needs to 
+look at the destination address to figure out how to best move a packet 
+towards its destination. The destination computer needs to look at the source 
+address to determine where to send an acknowledgement to indicate the packet was recieved.
+
+With each router in the Internet handling packets destined for any of many
+billions of destination computers, it's not possible for every router to know
+the exact location and best route to every possible destination computer. So
+the router makes its best guess as to how to get a packet closer to its
+destination.
+
+Each of the other routers along the way also does its best to get a packet
+closer to the destination computer. As a packet gets closer to its final
+destination, the routers have a better idea of exactly where a packet
+needs to go. When the packet reaches the last router in its journey, that
+router knows exactly which computer should receive the packet.
+
+We use a similar approach to route ourselves when going on a trip. A
+trip also has many hops. Perhaps the first hop is driving your car or
+taking a cab or bus to a train station. Then you take a local train from your small
+town to a larger city. In the larger city you take a long-distance train to a
+large city in another country. Then you take another local train to the small
+village where you will stay. When you get off the train, you
+take a bus, and when you get off the bus, you walk to your hotel.
+
+If you were on the train between the two large cities and you asked the
+conductor the exact location of your hotel in the small village, the conductor
+would not know. The conductor only knows how to get you closer to your
+destination, and while you are on the long-distance train that is all that
+matters. When you get on the bus at your destination village, you can ask the
+bus driver which stop is closest to your hotel. And when you get off the
+bus at the right bus stop, you can probably ask a person on the street where
+to find the hotel and get an exact answer.
+
+The further you are from your destination, the less you need to know the
+exact details of how to get there. When you are far away, all you need to
+know is how to get "closer" to your destination. Routers on the Internet
+work the same way. Only the routers that are closest to the destination
+computer know the exact path to that computer. All of the routers in the
+middle of the journey work to get your message closer to its destination.
+
+But just like when you are traveling, unexpected problems or delays can come up
+that require a change in plans as packets are sent across the network.
+
+![A Multi-Step Trip](../sketchnote/Multiple_step_trip)
+
+Routers exchange special messages to inform each other about any kind of
+traffic delay or network outage so that packets can be switched from a route
+that is no longer working to a different route. The routers that make up the
+core of the Internet are smart and adapt quickly to both small and large outages
+or failures of connections between routers. Sometimes a connection
+slows down because it is overloaded. Other times a connection is
+physically broken when a construction crew mistakenly digs up a buried wire and
+cuts it. Sometimes there is a natural disaster like a hurricane or typhoon
+that shuts down the routers and links in a large geographical area. The
+routers quickly detect these outages and reroute around them if possible.
 
 The Link Layer
 --------------
 
-The Link layer is responsible for connecting your computer to its local
-network and moving the data across a single hop. The most common Link layer
-technology today is wireless networking. When you are using a wireless device,
-the device is only sending data a limited distance. A smartphone
-communicates with a tower that is a few kilometers away. If you are using your
-smartphone on a train, it needs to switch to a new tower every few minutes
-when the train is moving. A laptop that is connected to a WiFi network is
-usually communicating with a base station within 200 meters. A desktop
-computer that is connected using a wired connection is usually using a cable
-that is 100 meters long or shorter. Link layer technologies are often
-shared amongst multiple computers at the same location.
+The Link layer is the lowest layer in the network stack. This layer is 
+responsible for moving data across a single hop. 
+
+The most common Link layer technology used in a local area network is wireless.
+When you are using a wireless device, the device is only sending
+data a limited distance. A smartphone communicates with a tower that is a few
+kilometers away. If you are using your smartphone on a train, it needs to
+switch to a new tower every few minutes when the train is moving. A laptop that
+is connected to a WiFi network is usually communicating with a base station
+within 200 meters. A desktop computer that is connected using a wired
+connection is usually using a cable that is 100 meters long or shorter. Link
+layer technologies are often shared amongst multiple computers at the same
+location.
 
 The Link layer needs to solve two basic problems when dealing with these
 shared local area networks. The first problem is how to encode and send data
@@ -113,176 +280,13 @@ lines are generally not shared and are used for connections between routers.
 These non-shared connections are still part of the Link layer.
 
 The engineers working on Link layer technologies focus solving the issues
-so computers can transmit data
+so computers or routers can transmit data
 across a single link that ranges in distance from a few meters to as long as
 hundreds of kilometers. But to move data greater distances, we need to send our
 packets through multiple routers connected by multiple link layers. Each time
-our packet passes through another link layer from one router to another we call
+our packet passes through another link from one router to another we call
 it a "hop". To send data halfway around the world, it will pass through about
 20 routers, or make 20 "hops".
-
-The Internetwork Layer (IP)
----------------------------
-
-Once your packet destined for the Internet makes it across the first link,
-it will be in a router. Your packet has a source address and destination
-address and the router needs to look at the destination address to figure
-out how to best move your packet towards its destination. With each router
-handling packets destined for any of many billions of destination
-computers, it's not possible for every router to know the exact location and
-best route to every possible destination computer. So the router makes its
-best guess as to how to get your packet closer to its destination.
-
-Each of the other routers along the way also does its best to get your packet
-closer to the destination computer. As your packet gets closer to its final
-destination, the routers have a better idea of exactly where your packet
-needs to go. When the packet reaches the last link in its journey, the
-link layer knows exactly where to send your packet.
-
-We use a similar approach to route ourselves when going on holiday. A
-holiday trip also has many hops. Perhaps the first hop is driving your car or
-taking a cab or bus to a train station. Then you take a local train from your small
-town to a larger city. In the larger city you take a long-distance train to a
-large city in another country. Then you take another local train to the small
-village where you will stay for your holiday. When you get off the train, you
-take a bus, and when you get off the bus, you walk to your hotel.
-
-If you were on the train between the two large cities and you asked the
-conductor the exact location of your hotel in the small village, the conductor
-would not know. The conductor only knows how to get you closer to your
-destination, and while you are on the long-distance train that is all that
-matters. When you get on the bus at your destination village, you can ask the
-bus driver which stop is closest to your hotel. And when you get off the
-bus at the right bus stop, you can probably ask a person on the street where
-to find the hotel and get an exact answer.
-
-The further you are from your destination, the less you need to know the
-exact details of how to get there. When you are far away, all you need to
-know is how to get "closer" to your destination. Routers on the Internet
-work the same way. Only the routers that are closest to the destination
-computer know the exact path to that computer. All of the routers in the
-middle of the journey work to get your message closer to its destination.
-
-But just like when you are traveling, unexpected problems or delays can come up
-that require a change in plans as your packets are sent across the network.
-
-![A Multi-Step Trip](../sketchnote/Multiple_step_trip)
-
-Routers exchange special messages to inform each other about any kind of
-traffic delay or network outage so that packets can be switched from a route
-that is no longer working to a different route. The routers that make up the
-core of the Internet are smart and adapt quickly to both small and large outages
-or failures of network connections. Sometimes a connection
-slows down because it is overloaded. Other times a connection is
-physically broken when a construction crew mistakenly digs up a buried wire and
-cuts it. Sometimes there is a natural disaster like a hurricane or typhoon
-that shuts down the routers and links in a large geographical area. The
-routers quickly detect these outages and reroute around them if possible.
-
-But sometimes things go wrong and packets are lost. Dealing with
-lost packets is the reason for the next layer in our architecture.
-
-The Transport Layer (TCP)
--------------------------
-
-The Internetwork layer is both simple and complex. It looks at a
-packet's destination address and finds a path across multiple network hops to
-deliver the packet to the destination computer. But sometimes these packets
-get lost or badly delayed. Other times the packets arrive at their destination
-out of order because a later packet found a quicker path through the network
-than an earlier packet. Each packet contains the source computer's address,
-the destination computer's address, and an offset of where this packet "fits"
-relative to the beginning of the message. Knowing the offset of each packet
-from the beginning of the message and the length of the packet, the destination
-computer can reconstruct the original message even if the packets were received
-out of order.
-
-\index{acknowledgements}
-\index{ACK}
-As the destination computer reconstructs the message and delivers it to
-the receiving application, it periodically sends an
-acknowledgement back to the source computer indicating how much of the message it
-has received and reconstructed. But if the destination computer finds that parts
-of the reconstructed message are missing, this probably means that these packets were
-lost or badly delayed. After waiting a bit, the destination computer sends
-a request to the source computer to resend the data that seems to be missing.
-
-The sending computer must store a copy of the parts of the original message
-that have been sent until the destination computer acknowledges successful receipt
-of the packets. Once the source computer receives the acknowledgment of
-successful receipt of a portion of the message, it can discard the data that
-has been acknowledged and send some more data.
-
-\index{window size}
-\index{courtesy}
-The amount of data that the source computer sends before waiting for an
-acknowledgement is called the "window size". If the window size is too small,
-the data transmission is slowed because the source computer is always waiting
-for acknowledgments. If the source computer sends too much data before waiting
-for an acknowledgment, it can unintentionally cause traffic problems by
-overloading routers or long-distance communication lines. This problem is
-solved by keeping the window size small at the beginning and timing how
-long it takes to receive the first acknowledgements. If the acknowledgments
-come back quickly, the source computer slowly increases the window size and if
-the acknowledgements come back slowly, the source computer keeps the window
-size small so as not to overload the network. Just like at the Link layer, a
-little courtesy on the Internet goes a long way toward ensuring good use of the
-shared network infrastructure.
-
-\index{flow control}
-This strategy means that when the network has high-speed connections and is
-lightly loaded the data will be sent quickly, and if the network is
-heavily loaded or has slow connections the data will be slowed down to match
-the limitations of the network connections between the source and destination
-computers.
-
-The Application Layer
----------------------
-
-\index{Application Layer}
-\index{Layer!Application}
-The Link, Internetwork, and Transport layers work together to quickly and
-reliably move data between two computers across a shared network of networks.
-With this capability to move data reliably, the next question is what
-networked applications will be built to make use of these network connections.
-
-\index{remote log in}
-When the first widely used Internet came into being in the mid-1980s, the first
-networked applications allowed users to log in to remote computers, transfer files
-between computers, send mail between computers, and even do real-time text chats
-between computers.
-
-\index{Web}
-\index{CERN}
-In the early 1990s, as the Internet came to more people and computers' abilities
-to handle images improved, the World Wide Web application was developed by
-scientists at the CERN high-energy physics facility. The web was focused on
-reading and editing networked hypertext documents with images. Today the web is
-the most common network application in use around the world.  But all the other
-older Internet applications are still in wide use.
-
-\index{client}
-\index{server}
-\index{client-server}
-\index{URL}
-\index{Uniform Resource Locator}
-Each application is generally broken into two halves. One half of the
-application is called the "server". It runs on the destination computer and
-waits for incoming networking connections. The other half of the application
-is called the "client" and runs on the source computer. When you are browsing
-the web using software like Firefox, Chrome, or Internet Explorer, you are
-running a "web client" application which is making connections to web servers
-and displaying the pages and documents stored on those web servers. The
-Uniform Resource Locators (URLs) that your web browser shows in its address bar
-are the web servers that your client is contacting to retrieve documents for
-you to view.
-
-When we develop the server half and the client half of a networked application,
-we must also define an "application protocol" that describes how the two
-halves of the application will exchange messages over the network. The protocols
-used for each application are quite different and specialized to meet the needs
-of the particular application.  Later we will explore some of these Application
-layer protocols.
 
 Stacking the Layers
 -------------------
@@ -334,14 +338,17 @@ connections are fast and can cover very long distances.
 **offset**: The relative position of a packet within an overall message
 or stream of data.
 
+**protocol**: A set of rules that govern how applications or computers 
+communicate.
+
 **server**:
 In a networked application, the server application is the one that responds
 to requests for services or waits for incoming connections.
 
-**window size**: The amount of data that the sending computer is allowed to 
-send before waiting for an acknowledgement.
+<!--**window size**: The amount of data that the sending computer is allowed to 
+send before waiting for an acknowledgement.-->
 
-
+<!--
 Questions
 ---------
 
@@ -409,4 +416,4 @@ d) Unified Recovery List
 
 
 
-
+-->

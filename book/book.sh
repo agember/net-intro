@@ -3,7 +3,7 @@
 # For yucks make the epub
 pandoc --default-image-extension=svg --epub-cover=cover/intro_networking_frontcover_final.png --epub-stylesheet=epub.css *.mkd -o x.epub
 
-rm tmp.* *.tmp *.aux
+rm -f tmp.* *.tmp *.aux
 pandoc A1-preface.mkd -o tmp.prefacex.tex
 sed < tmp.prefacex.tex 's/section{/section*{/' > tmp.preface.tex
 pandoc -s -N -f markdown+definition_lists --toc --default-image-extension=eps -V fontfamily:arev -V fontsize:11pt -V documentclass:book --template=template.latex [0-9]*.mkd -o tmp.tex
@@ -16,13 +16,13 @@ latex tmp
 makeindex tmp
 latex tmp
 dvipdf tmp.dvi x.pdf
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  open x.pdf
-elif [[ "$OSTYPE" == "linux-gnu" && -n "$DISPLAY" ]]; then
-  xdg-open x.pdf
-else
-  echo "Output on x.pdf"
-fi
+#if [[ "$OSTYPE" == "darwin" ]]; then
+#  open x.pdf
+#elif [[ "$OSTYPE" == "linux-gnu" && -n "$DISPLAY" ]]; then
+#  xdg-open x.pdf
+#else
+#  echo "Output on x.pdf"
+#fi
 
 rm tmp.* 
 
