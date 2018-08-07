@@ -3,11 +3,9 @@ Application Layer
 
 \index{Application Layer}
 \index{Layer!Application}
-We have been working from the bottom to the top of our four-layer TCP/IP network model
-and we are finally at the top.  The Application layer is where the networked software
-like web browsers, mail programs, video players, or networked video players operate.
-We as users interact with these applications and the applications interact
-with the network on our behalf.
+The Application layer is where the networked software like web browsers, video
+games, and video calling applications operate.  We as users interact with these
+applications and the applications interact with the network on our behalf.
 
 ![The Application Layer](../images/layers-application)
 
@@ -24,16 +22,14 @@ use the Transport layer on each of their computers to exchange data.
 
 ![Client/Server Applications](../sketchnote/Client_Server)
 
-To browse a web address like www.khanacademy.org, you must have a
+To browse a web address like www.colgate.edu, you must have a
 web application running on your computer. When you type an address into your
 web browser, it connects to the appropriate web server, retrieves
 pages for you to view, and then shows you the pages.
 
-The web browser on your computer sends a request to connect to
-www.khanacademy.org. Your computer looks up the domain name to find the
-corresponding IP address for the server and makes a transport connection to
-that IP address, then begins to request data from the server over that
-network connection. When the data is received, the web browser shows it to you.
+The web browser on your computer makes a transport connection to
+www.colgate.edu, then begins to request data from the server over that network
+connection. When the data is received, the web browser shows it to you.
 Sometimes web browsers display a small animated icon to let you know that the
 data is being retrieved across the network.
 
@@ -42,10 +38,10 @@ On the other end of the connection is another application called a
 connections. So when you want to see a web page, you are connecting to a
 server application that is already running and waiting for your connection.
 
-In a sense, the Transport, Internetwork, and Link layers, along with the Domain
+<!--In a sense, the Transport, Internetwork, and Link layers, along with the Domain
 Name System, are like a telephone network for networked applications. They "dial
 up" different server applications on the network and have "conversations"
-with those applications to exchange data.
+with those applications to exchange data.--->
 
 Application Layer Protocols
 ---------------------------
@@ -122,20 +118,15 @@ according to one of the earliest standards for the Internet:
 
 \index{ARPANET}
 \index{NSFNet}
-This standard is only five pages long and at this point, you probably can
-easily read and understand most of what is in the document. The telnet
-client application is so old that it is effectively a dinosaur, as it comes from
-"prehistoric" times in terms of the age of the Internet. The Internet
-was created in 1985 by the NSFNet project and the precursor to the NSFNet
-called the ARPANET was brought up in 1969. Telnet was designed and built
+The telnet client application is so old that it is effectively a dinosaur, as
+it comes from "prehistoric" times in terms of the age of the Internet. The
+Internet was created in 1985 by the NSFNet project and the precursor to the
+NSFNet called the ARPANET was brought up in 1969. Telnet was designed and built
 even before the first TCP/IP network was in production.
 
 Interestingly, the telnet application is still present in most modern operating
 systems. You can access telnet from the terminal (command line) in Macintosh
-and Linux. The telnet application was also present in Windows 95 through Windows
-XP, but is not included in later versions of Windows. If you have a later
-version of Windows, you can download and install a telnet client to
-do the examples in this section.
+and Linux.  
 
 Telnet is a simple application.  Run telnet from the command line (or
 terminal) and type the following command:
@@ -144,19 +135,18 @@ terminal) and type the following command:
 
 \index{TCP ports}
 \index{port 80}
-The first parameter is a domain name (an IP address would work here as well)
-and a port to connect to on that host. We use the port to indicate which
-application server we would like to connect to. Port 80 is where we typically
-expect to find an HTTP (web) server application on a host. If there is no web
-server listening on port 80, our connection will time out and fail. But if
-there is a web server, we will be connected to that web server and whatever we
-type on our keyboard will be sent directly to the server. At this point, we
-need to know the HTTP protocol and type the commands precisely as expected.
-If we don't know the protocol, the web server will not be too friendly. Here
-is an example of things not going well:
+The first parameter is a domain name and the second parameter is a ``port'' to
+connect to on that host. We use the port to indicate which application server
+we would like to connect to.  Port 80 is where we typically expect to find an
+HTTP (web) server application on a host. If there is no web server listening on
+port 80, our connection will time out and fail. But if there is a web server,
+we will be connected to that web server and whatever we type on our keyboard
+will be sent directly to the server. At this point, we need to know the HTTP
+protocol and type the commands precisely as expected.  If we don't know the
+protocol, the web server will not be too friendly. Here is an example of things
+not going well:
 
     telnet www.dr-chuck.com 80
-    Trying 198.251.66.43...
     Connected to www.dr-chuck.com.
     Escape character is '^]'.
     HELP
@@ -167,10 +157,9 @@ is an example of things not going well:
     </body></html>
     Connection closed by foreign host.
 
-We type "telnet" in the terminal requesting a connection to port 80
-(the web server) on the host www.dr-chuck.com.  You can see as our transport
-layer is looking up the domain name, finding that the actual address is
-"198.251.66.43", and then making a successful connection to that server. Once
+We type "telnet" in the terminal requesting a connection to the web server
+on the computer www.dr-chuck.com.  You can see the transport
+layer makes a successful connection to that server. Once
 we are connected, the server waits for us to type a command followed by
 the enter or return key. Since we don't know the protocol, we type
 "HELP" and enter. The server is not pleased, gives us an error message, and
@@ -182,7 +171,6 @@ But let's go back and read section 5.3.2 of the RFC-7230 document and try again
 to request a document using the correct syntax:
 
     telnet www.dr-chuck.com 80
-    Trying 198.251.66.43...
     Connected to www.dr-chuck.com.
     Escape character is '^]'.
     GET http://www.dr-chuck.com/page1.htm HTTP/1.0
@@ -235,6 +223,7 @@ with tags like \<h1\> and \<p\>. When your browser receives
 the document in HTML format, it looks at the markup in the document, interprets
 it, and presents you a formatted version of the document.
 
+<!--
 The IMAP Protocol for Retrieving Mail
 -------------------------------------
 
@@ -394,22 +383,25 @@ By choosing
 port 80 we are indicating that we want to connect to a World Wide Web server on
 that host and are expecting to communicate with that server using the HyperText
 Transport Protocol.
+-->
 
 Summary
 -------
 
-The entire purpose of the lower three layers (Transport, Internetwork, and
+Internet applications exchange precisely fromatted messages to transfer data from one computer to another. Thanks to the Internet's layered architecture, applications only need to worry about the formatting and content of their messages. The details of how the message reaches the destination is handled by the lower layers of the network stack, which discuss in the next sections.
+
+<!--The entire purpose of the lower three layers (Transport, Internetwork, and
 Link) is to make it so that applications running in the Application layer can
 focus the application problem that needs to be solved and leave
 virtually all of the complexity of moving data across a network to be
 handled by the lower layers of the network model.
 
 Because this approach makes it so simple to build networked applications, we
-have seen a wide range of networked applications including web browsers, mail
-applications, networked video games, network-based telephony applications, and
+have seen a wide range of networked applications including web browsers, 
+video games, video calling applications, and
 many others. And what is even more exciting is that it is easy to experiment
 and build whole new types of networked applications to solve problems that
-have not yet been imagined.
+have not yet been imagined.-->
 
 Glossary
 --------
@@ -420,19 +412,6 @@ Example HTML looks like: \<p\>This is \<strong\>nice\</strong\>\</p\>.
 
 **HTTP**: HyperText Transport Protocol.  An Application layer protocol
 that allows web browsers to retrieve web documents from web servers.
-
-**IMAP**: Internet Message Access Protocol.  A protocol that allows
-mail clients to log into and retrieve mail from IMAP-enabled mail servers.
-
-**flow control**: When a sending computer slows down to make
-sure that it does not overwhelm either the network or the destination computer.
-Flow control also causes the sending computer to increase the speed at which data
-is sent when it is sure that the network and destination computer can handle the
-faster data rates.
-
-**socket**: A software library available in many programming languages
-that makes creating a network connection and exchanging data
-nearly as easy as opening and reading a file on your computer.
 
 **status code**: One aspect of the HTTP protocol that indicates the overall 
 success or failure of a request for a document. The most well-known
@@ -450,8 +429,7 @@ to retrieve and display web pages.
 
 **web server**: An application that deliver (serves up) Web pages
 
-
-
+<!--
 Questions
 ---------
 
@@ -565,4 +543,4 @@ d) The initial size of the TCP window during transmission
 
 
 
-
+-->

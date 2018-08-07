@@ -22,7 +22,7 @@ names: (1) Link, (2) Internetwork, (3) Transport, and (4) Application.  We
 visualize these different areas as layers stacked on top of each other,
 with the Link layer on the bottom and the Application layer on the top.  The
 Link layer deals with the wired or wireless connection from your
-computer to the local area network and the Application layer is what we as end
+computer to the local area network and the Application layer is what we as
 users interact with.   A web browser is one example of an application in this
 Internet architecture.
 
@@ -86,9 +86,10 @@ The Transport Layer (TCP)
 
 The data requested from a web server may be quite large. For example, this book
 is over 150,000 characters and contains several dozen images. Thus, the data
-must be broken into smaller pieces before being sent to your computer. It is
-the job of the Transport layer to divide an application's messages into
-packets.
+must be broken into smaller pieces before being sent to your computer. The
+Transport layer is responsible for dividing an application's message into
+packets at the source computer and reassembling the original message at the
+destination computer.
 
 Sometimes these packets get lost. Other times the packets
 arrive at their destination out of order because a later packet found a quicker
@@ -142,10 +143,10 @@ The Internetwork Layer (IP)
 ---------------------------
 
 In addition to an offset, each packet is labeled with the addresses 
-of the source and destination computers. Each router in the network needs to 
-look at the destination address to figure out how to best move a packet 
-towards its destination. The destination computer needs to look at the source 
-address to determine where to send an acknowledgement to indicate the packet was recieved.
+of the source and destination computers. Routers look at a packet's destination
+address to figure out how to best move a packet towards its destination. The
+destination computer looks at the source address to determine where to send an
+acknowledgement to indicate the packet was recieved.
 
 With each router in the Internet handling packets destined for any of many
 billions of destination computers, it's not possible for every router to know
@@ -202,8 +203,9 @@ routers quickly detect these outages and reroute around them if possible.
 The Link Layer
 --------------
 
-The Link layer is the lowest layer in the network stack. This layer is 
-responsible for moving data across a single hop. 
+The Link layer is the lowest layer in the network stack. This layer is
+responsible for moving data from one router to the next using wires or radio
+signals.
 
 The most common Link layer technology used in a local area network is wireless.
 When you are using a wireless device, the device is only sending
