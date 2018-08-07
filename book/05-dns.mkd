@@ -126,7 +126,7 @@ are subdomains within "umich.edu".
 Example TLDs include ".com", ".org", and ".ru". Recently, new
 top-level domains like ".club" and ".help" were added.
 
-
+<!--
 Questions
 ---------
 
@@ -162,4 +162,4 @@ d) Assign an IP address to the domain or subdomain
 
 
 
-
+-->

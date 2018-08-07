@@ -3,8 +3,8 @@ Application Layer
 
 \index{Application Layer}
 \index{Layer!Application}
-The Application layer is where the networked software like web browsers, video
-games, and video calling applications operate.  We as users interact with these
+Networked software like web browsers, video games, and video calling
+applications reside in the Application layer. We as users interact with these
 applications and the applications interact with the network on our behalf.
 
 ![The Application Layer](../images/layers-application)
@@ -13,16 +13,16 @@ Client and Server Applications
 ------------------------------
 
 It is important to remember that two parts are required for a networked
-application to function. The architecture for a networked application is
-called "client/server". The server portion of the application runs somewhere
-on the Internet and has the information that users want to view or interact with.
-The client portion of the application makes connections to the server application,
-retrieves information, and shows it to the user. These applications
-use the Transport layer on each of their computers to exchange data.
+application to function: the client and the server. The server portion of the
+application runs somewhere on the Internet and has the information that users
+want to view or interact with.  The client portion of the application requests
+information from the server and shows it to the user. 
+<!--These applications use the Transport layer on each of their computers to
+help facilitate the exchange of data.-->
 
 ![Client/Server Applications](../sketchnote/Client_Server)
 
-To browse a web address like www.colgate.edu, you must have a
+<!--To browse a web address like www.colgate.edu, you must have a
 web application running on your computer. When you type an address into your
 web browser, it connects to the appropriate web server, retrieves
 pages for you to view, and then shows you the pages.
@@ -36,7 +36,7 @@ data is being retrieved across the network.
 On the other end of the connection is another application called a
 "web server". The web server program is always up and waiting for incoming
 connections. So when you want to see a web page, you are connecting to a
-server application that is already running and waiting for your connection.
+server application that is already running and waiting for your connection.-->
 
 <!--In a sense, the Transport, Internetwork, and Link layers, along with the Domain
 Name System, are like a telephone network for networked applications. They "dial
@@ -135,16 +135,16 @@ terminal) and type the following command:
 
 \index{TCP ports}
 \index{port 80}
-The first parameter is a domain name and the second parameter is a ``port'' to
-connect to on that host. We use the port to indicate which application server
-we would like to connect to.  Port 80 is where we typically expect to find an
-HTTP (web) server application on a host. If there is no web server listening on
-port 80, our connection will time out and fail. But if there is a web server,
-we will be connected to that web server and whatever we type on our keyboard
-will be sent directly to the server. At this point, we need to know the HTTP
-protocol and type the commands precisely as expected.  If we don't know the
-protocol, the web server will not be too friendly. Here is an example of things
-not going well:
+The first parameter is the web server's name and the second parameter is a
+``port'' to connect to on that server. We use the port to indicate which
+application we would like to connect to.  Port 80 is where we typically
+expect to find an HTTP (web) server application on a computer. If there is no
+web server listening on port 80, our connection will time out and fail. But if
+there is a web server, we will be connected to that web server and whatever we
+type on our keyboard will be sent directly to the server. At this point, we
+need to know the HTTP protocol and type the commands precisely as expected.  If
+we don't know the protocol, the web server will not be too friendly. Here is an
+example of things not going well:
 
     telnet www.dr-chuck.com 80
     Connected to www.dr-chuck.com.

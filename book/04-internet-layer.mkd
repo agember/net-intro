@@ -531,7 +531,7 @@ destination.  May be called "tracert" on Windows systems.
 paths between any pair of nodes in a network.  A two-connected network can 
 lose any single link without losing overall connectivity.
 
-
+<!--
 Questions
 ---------
 
@@ -684,5 +684,5 @@ f) United Nations
 
 
 
-
+-->
 
